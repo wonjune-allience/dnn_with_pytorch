@@ -5,6 +5,8 @@ import torch
 import numpy as np
 import matplotlib.pyplot as plt
 
+from torch.utils.data import Dataset
+
 #### 1-D tensor ####
 c = torch.tensor([100, 1, 2, 3, 0])
 print(c.dtype)
@@ -34,3 +36,18 @@ A_times_B = torch.mm(A,B)
 print(A_times_B)
 
 #### derivatives ####
+x = torch.tensor(1.0, requires_grad=True)
+y = 2 * x ** 3 + x
+y.backward()
+#x.grad
+print(x.grad)
+
+# partial derivatives
+u = torch.tensor(2.0, requires_grad = True)
+v = torch.tensor(1.0, requires_grad = True)
+f = u * v + (u * v) ** 2
+f.backward()
+print("The result is ", u.grad)
+
+
+#### building dataset ####
